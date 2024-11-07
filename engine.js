@@ -28,6 +28,12 @@ function countDown(){
     }
 }
 
+function playSound(audioName){
+    let audio = new Audio(`./src/audios/${audioName}.m4a`);
+    audio.volume = 0.1
+    audio.play()
+}
+
 function randomSquare(){
     state.view.squares.forEach((square) => {
         square.classList.remove("enemy");
@@ -43,6 +49,7 @@ function addListenerHitBox(){
     state.view.squares.forEach((square) => {
         square.addEventListener("mousedown", () => {
             if(square.id === state.value.hitPosition){
+                playSound("hit");
                 state.value.result++;
                 state.view.score.textContent = state.value.result;
                 state.value.hitPosition = null;
@@ -50,7 +57,6 @@ function addListenerHitBox(){
         })
     })
 };
-
 
 function initialize(){
     addListenerHitBox();
